@@ -1,0 +1,62 @@
+<%- include('partials/_header'); -%>
+
+<div class="container">
+	<div class="row mt-5">
+		<div class="col-md-7">
+			<table class="table table-bordered table hover">
+
+				<thead>
+
+					<th>Tarea</th>
+					<th>Estado</th>
+					<th>Acciones</th>
+				</thead>
+				<tbody>
+
+					<% if (data) { %>
+						<% for (var i=0; i < data.length; i++){%>
+
+							<tr>
+								<td><%= data[i].Actividad %></td>
+								<% if (data[i].Estado == 'Terminada') { %>
+									<td style="background-color: #8FFA4A; color: white; font-family: verdana; "><%= data[i].Estado %></td>
+								<% }else if (data[i].Estado == 'En proceso') { %>
+									<td style="background-color: #FF4127; color: white; font-family: verdana; "><%= data[i].Estado %></td>
+								<% } %>
+								<td>
+									<a href="/borrar/<%= data[i].ID %> " class="btn btn-danger">
+										Borrar
+									</a>
+
+									<a href="/actualizar/<%= data[i].ID %> " class="btn btn-info">
+										Marcar tarea
+									</a>
+								</td>	
+							</tr>
+						<%}%>
+					<% } %>
+					
+				</tbody>
+				
+			</table>
+			
+		</div>
+
+		<div class="col-md-5">
+			<div class="card">
+				<div class="card-body">
+					<form action="/add" method="post">
+						<div class="form-group">
+							<input type="text" name="actividad" placeholder="¿Cual es tu nueva tarea?" class="form-control">
+						</div>
+						<button type="submit" class="btn btn-primary">
+							Guardar Tarea
+						</button>
+
+					</form>
+				</div>	
+			</div>
+		</div>		
+	</div>
+</div>
+<%- include('partials/_footer'); -%>
